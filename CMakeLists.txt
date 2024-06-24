@@ -17,6 +17,8 @@ set (MY_DIALOD_ADD_DIR ${CMAKE_SOURCE_DIR}/dialog_add)
 set (MY_DIALOG_CHANGE_DIR ${CMAKE_SOURCE_DIR}/dialog_change)
 set (MY_DIALOG_SELECT_DIR ${CMAKE_SOURCE_DIR}/dialog_select)
 set (MY_FILMS_DIR ${CMAKE_SOURCE_DIR}/Films)
+set (MY_DB_MANAGER_DIR ${CMAKE_SOURCE_DIR}/db_manager)
+set (MY_FILM_MANAGER_DIR ${CMAKE_SOURCE_DIR}/film_manager)
 
 set(PROJECT_SOURCES
         main.cpp
@@ -34,6 +36,10 @@ set(PROJECT_SOURCES
         ${MY_DIALOG_SELECT_DIR}/dialog_select.ui
         ${MY_FILMS_DIR}/Films.cpp
         ${MY_FILMS_DIR}/Films.h
+        ${MY_DB_MANAGER_DIR}/db_manager.cpp
+        ${MY_DB_MANAGER_DIR}/db_manager.h
+        ${MY_FILM_MANAGER_DIR}/film_manager.cpp
+        ${MY_FILM_MANAGER_DIR}/film_manager.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -59,7 +65,7 @@ else()
     endif()
 endif()
 
-target_include_directories(Films_UI_Qt PUBLIC ${MY_MAINWINDOW_DIR} ${MY_DIALOD_ADD_DIR} ${MY_DIALOG_CHANGE_DIR} ${MY_DIALOG_SELECT_DIR} ${MY_FILMS_DIR})
+target_include_directories(Films_UI_Qt PUBLIC ${MY_MAINWINDOW_DIR} ${MY_DIALOD_ADD_DIR} ${MY_DIALOG_CHANGE_DIR} ${MY_DIALOG_SELECT_DIR} ${MY_FILMS_DIR} ${MY_DB_MANAGER_DIR} ${MY_FILM_MANAGER_DIR})
 target_link_libraries(Films_UI_Qt PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Sql)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

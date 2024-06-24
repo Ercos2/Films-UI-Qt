@@ -1,7 +1,5 @@
-
 #include <QApplication>
 #include "mainwindow.h"
-#include "Films.h"
 
 int main(int argc, char *argv[])
 {

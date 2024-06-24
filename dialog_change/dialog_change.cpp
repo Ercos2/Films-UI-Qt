@@ -1,54 +1,47 @@
-
 #include "dialog_change.h"
 #include "./ui_dialog_change.h"
-#include "Films.h"
 
-Dialog_change::Dialog_change(std::shared_ptr<Films> films, QWidget *parent) :
+Dialog_change::Dialog_change(std::shared_ptr<Film_manager> film_manager, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Dialog_change)
 {
     ui->setupUi(this);
-    this->films = films;
+    this->film_manager = film_manager;
 
     //display the names for selection from db
     ui->Dia_name->addItem(" ");
-    for (int i = 1; i <= films->get_num(); ++i) {
-         ui->Dia_name->addItem(*films->get_name(i));
+    for (int i = 1; i <= film_manager->films->get_num(); ++i) {
+         ui->Dia_name->addItem(*film_manager->films->get_name(i));
     }
 }
 
-Dialog_change::~Dialog_change()
-{
-    delete ui;
-}
+Dialog_change::~Dialog_change(){}
 
-void Dialog_change::on_Dia_ok_clicked()
-{
-    int w_unw, a;
-    QString name = ui->Dia_name->currentText();
+void Dialog_change::on_Dia_ok_clicked() {
+    int w_unw = 0;
+    auto name = std::make_unique<QString>(ui->Dia_name->currentText());
 
     //check the filling of the fields
-    if (name == " ") {
-         films->ErrorMessage((char*)"Выберите название");
+    if (*name == " ") {
+         QMessageBox::warning(NULL, "Warning", (char*)"Выберите название");
         return;
     }
     if (ui->Dia_w->isChecked()) w_unw = 1;
     if (ui->Dia_unw->isChecked()) w_unw = 0;
     if (!(ui->Dia_w->isChecked()) && !(ui->Dia_unw->isChecked())) {
-        films->ErrorMessage((char*)"ВЫберите статус просмотра");
+        QMessageBox::warning(NULL, "Warning", (char*)"ВЫберите статус просмотра");
        return;
     }
 
     //make changes throgh the function
-    a = films->change_w_unw(name, w_unw);
-
     //if no error message is returned, close window
-    if (a != -1){
-       films->SuccessMessage((char*)"Статус просмотра изменён");
+    if (film_manager->films->change_w_unw(std::move(name), w_unw) != -1){
+       QMessageBox::about(NULL, "Success", (char*)"Статус просмотра изменён");
         close();
-        }
+    }
     else
-        films->ErrorMessage((char*)"Не удалось изменить статус просмотра");
+        QMessageBox::warning(NULL, "Warning", (char*)"Не удалось изменить статус просмотра");
+
 }
 
 void Dialog_change::on_Dia_cancel_clicked()
@@ -74,5 +67,6 @@ void Dialog_change::closeEvent(QCloseEvent *) {
     ui->Dia_unw->setAutoExclusive(true);
     ui->Dia_w->setAutoExclusive(true);
 
+    emit dialog_closed();
 }
 

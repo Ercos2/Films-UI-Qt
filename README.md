@@ -16,24 +16,3 @@ There are 3 buttons on the initial window:
 
 The project is based on SQLite and Qt libraries.
 Most of the program runs on smart pointers to avoid possible memory loss
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-# Films-UI-Qt
-
-Этот проект помогает упорядочить фильмы для будущего просмотра или уже просмотренные.
-Проект имеет оконный интерфейс.
-![alt text](https://github.com/Ercos2/Films-UI-Qt/blob/master/pics/main_window.png)
-
-На начальном окне 3 кнопки:
-* 1. Отображает внесённые непросмотренные фильмы, напоминая пользователю, что он внёс и ещё не посмотрел
-![alt text](https://github.com/Ercos2/Films-UI-Qt/blob/master/pics/select_window.png)
-
-* 2. Изменение статуса просмотра. Позволяет отметить фильм просмотренным (чтобы он не отображался в первом пункте) или непросмотренным (чтобы он отображался в первом пункте)
-![alt text](https://github.com/Ercos2/Films-UI-Qt/blob/master/pics/change_window.png)
-
-* 3. Внесение новых фильмов. Позволяет указать название, жанр в выпадающем списке и статус просмотра (просмотрено или не просмотрено)
-![alt text](https://github.com/Ercos2/Films-UI-Qt/blob/master/pics/insert_window.png)
-
-В основе проекта лежит SQLite и библиотеках Qt.
-Большая часть программы работает на умных указателях, чтобы избежать возможных потерь памяти 
